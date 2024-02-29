@@ -11,8 +11,8 @@ open class Vehiculo(open val nombre: String,open val marca: String, open val mod
     companion object{
         private val listadonombres:MutableSet<String> = mutableSetOf()
         private fun comprobarNombre(nombre: String) = !listadonombres.add(nombre)
-        const val KM_Litros_GAS = 10f
     }
+    var KM_Litros_GAS = 10f
 
     open fun calcularAutonomia():Float{
         return (combustibleActual* KM_Litros_GAS).redondear(2)

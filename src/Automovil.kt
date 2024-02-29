@@ -9,7 +9,7 @@ class Automovil(
                 var condicionBritanica:Boolean = false
                 ):Vehiculo(nombre,marca , modelo , capacidadCombustible , combustibleActual ,kilometrosActuales
 ){
-
+    var KM_Litro_Hibrido = 15f
     fun cambiarCondicionBritania(nuevaCondicion:Boolean){
         condicionBritanica = cambiarABritanica()
     }
@@ -60,7 +60,6 @@ class Automovil(
     }
 
     companion object{
-        const val KM_Litro_Hibrido = 15f
         fun cambiarABritanica():Boolean {
             return true
         }

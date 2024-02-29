@@ -19,6 +19,7 @@ class Carrera(var nombreCarrera:String, val distanciaTotal:Float, var participan
     }
 
     fun avanzarVehiculo(vehiculo: Vehiculo){
+        var numeroDeLaCaja = cajaSorpresa(vehiculo)
         var distancia = Random.nextInt(10,250).toFloat()
         var contadorDeTramos = (distancia/20).toInt()
         do {
@@ -44,8 +45,20 @@ class Carrera(var nombreCarrera:String, val distanciaTotal:Float, var participan
             }
 
             contadorDeTramos--
-
         }while (contadorDeTramos != -1)
+
+        if (numeroDeLaCaja == 1 || numeroDeLaCaja == 6 ){
+            when(vehiculo){
+                is Automovil -> {
+                    if(vehiculo.esElectrico){
+                        vehiculo.KM_Litro_Hibrido = 15f
+                    }else {
+                        vehiculo.KM_Litros_GAS = 10f
+                    }
+                }
+                is Motocicleta ->{vehiculo.KM_Litros_Motos = 19}
+            }
+        }
     }
 
     fun registarAccion(corredor:Vehiculo,accion:String){
@@ -181,7 +194,63 @@ class Carrera(var nombreCarrera:String, val distanciaTotal:Float, var participan
         }
     }
 
- 
+    fun cajaSorpresa(vehiculo: Vehiculo): Int {
+        val numero = Random.nextInt(1,10)
+        when{
+            //Sumar10
+            numero == 1 -> {
+                when(vehiculo){
+                    is Automovil -> {
+                        if(vehiculo.esElectrico){
+                            vehiculo.KM_Litro_Hibrido = 25f
+                        }else {
+                            vehiculo.KM_Litros_GAS = 20f
+                        }
+                    }
+                    is Motocicleta ->{vehiculo.KM_Litros_Motos = 29}
+                }
+            }
+            //Teletransporte
+            numero == 2 ->{
+                vehiculo.kilometrosActuales+=100
+                determinarGanador()
+            }
+            //RetrasarTodos
+            numero == 3 ->{
+                participantes.forEach { if (it.nombre != vehiculo.nombre){
+                                            if (it.kilometrosActuales >= 100f){
+                                                    it.kilometrosActuales-=100f
+                                            }
+                                            else{it.kilometrosActuales = 0f}
+                                        }
+                                    }
+            }
+            //VehiculoAlinico
+            numero == 4 ->{
+                val participanteAlinicio = Random.nextInt(1,participantes.size)
+                participantes[participanteAlinicio].kilometrosActuales = 0f
+            }
+            //Casilla de salida
+            numero == 5 ->{
+                vehiculo.kilometrosActuales = 0f
+            }
+            //Resta5
+            numero == 6 ->{
+                when(vehiculo){
+                    is Automovil -> {
+                        if(vehiculo.esElectrico){
+                            vehiculo.KM_Litro_Hibrido = 10f
+                        }else {
+                            vehiculo.KM_Litros_GAS = 5f
+                        }
+                    }
+                    is Motocicleta ->{vehiculo.KM_Litros_Motos = 14}
+                }
+            }
+            else ->{return numero}
+        }
+        return numero
+    }
 }
 
 data class ResultadoCarrera(

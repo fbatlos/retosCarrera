@@ -9,7 +9,7 @@ class Motocicleta(
 ):Vehiculo(nombre,marca, modelo, capacidadCombustible,
     combustibleActual, kilometrosActuales
 ){
-
+    var KM_Litros_Motos = 19
     init {
         require(cilindrada>125 && cilindrada<1000){"Cilindrada no permitida."}
     }
@@ -40,9 +40,5 @@ class Motocicleta(
 
     override fun toString(): String {
         return "${super.toString()} , de cilindada : $cilindrada"
-    }
-
-    companion object{
-        const val KM_Litros_Motos = 19
     }
 }
