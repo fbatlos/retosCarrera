@@ -8,13 +8,13 @@ fun main(){
         Motocicleta("Fénix", "Honda", "Vital", 20f, 20f * 0.1f, 0f, 250) // Motocicleta eléctrica con capacidad de 20 litros, inicia con el 10%
     )
 
-    var frase = "   hola    jasa  poie    "
+    var frase = "   hola    jasa    poie      "
     frase = frase.normalizar()
     println(frase)
 
-    //val megaCarrera = Carrera("Gran Prix",1000f , listaparticipantes)
+    val megaCarrera = Carrera("Gran Prix",1000f , listaparticipantes)
 
-    //megaCarrera.iniciarCarrera()
+    megaCarrera.iniciarCarrera()
 
 }
 
