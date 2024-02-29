@@ -1,3 +1,6 @@
+
+import kotlin.math.pow
+import kotlin.math.roundToInt
 import kotlin.random.Random
 
 
@@ -253,6 +256,15 @@ class Carrera(var nombreCarrera:String, val distanciaTotal:Float, var participan
     }
 }
 
+fun String.normalizar():String{
+    val frase = this
+    val fraseSinEspacio = frase.trim()
+    val cadaPalabra= fraseSinEspacio.split(" ")
+    val palabrasCapitalizadas = cadaPalabra.map { it.replaceFirstChar { it.uppercase() } }
+    return palabrasCapitalizadas.joinToString(" ")
+}
+
+
 data class ResultadoCarrera(
     val vehiculo: Vehiculo,
     val posicion: Int,
@@ -260,3 +272,5 @@ data class ResultadoCarrera(
     val paradasRepostaje: Int?,
     val historialAcciones: MutableList<String>?
 )
+
+
