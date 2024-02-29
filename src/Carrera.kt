@@ -259,7 +259,7 @@ class Carrera(var nombreCarrera:String, val distanciaTotal:Float, var participan
 fun String.normalizar():String{
     val frase = this
     val fraseSinEspacio = frase.trim()
-    val cadaPalabra= fraseSinEspacio.split(" ")
+    val cadaPalabra= fraseSinEspacio.split(" ").filter { it.isNotEmpty() }
     val palabrasCapitalizadas = cadaPalabra.map { it.replaceFirstChar { it.uppercase() } }
     return palabrasCapitalizadas.joinToString(" ")
 }
